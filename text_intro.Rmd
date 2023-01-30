@@ -1,0 +1,24 @@
+#### Welcome to the **metadata extractor tool** for FHX files!
+
+----------------------------------------------------------
+
+The purpose of the tool is to help in extracting tree-ring information for fire history sites that can added to the [extended metadata table](https://docs.google.com/spreadsheets/d/1yn56c2FLwhbvaC9Vy0JqLZUpRAP4oC9w4q_P-P535cY/edit#gid=342535756) Google Sheet for the North American Fire History Synthesis project.
+
+Currently, we have nearly 2000 sites in our database, with more on the way -- an amazing achievement for our community! Thanks for your contribution. Find an update of the map at
+
+[https://chguiterman.github.io/NAFireHistory/map.html](https://chguiterman.github.io/NAFireHistory/map.html)
+
+
+Operating the extractor tool is easy -- just hit the **browse** button and select as many FHX files that you would like to input at once. You can come back to add more anytime.
+
+All the tool will do is crank through your files and output a table below this text with some of the information we requested in the Google Sheet. You can copy/paste these values into the table. 
+
+If you encounter a strange error message, in red text, than there is a problem with the formatting of one or more of your files. Unfortunately, we cannot currently identify the problems and help to solve them. We recommend you check out the file in a text editor, and [FHAES](https://www.frames.gov/fhaes/download) has a nice build-in error catching system. Sometimes loading the file in FHAES, then opening the editor tool, and saving the file is all you need to successfully run *burnr*, and thus this tool.
+
+If you have a lot of files and would like to extract the information from the headers, please let us know. We have tools to help with that, but have not yet implemented them here. We can provided there's enough demand. 
+
+Thanks again for your time, energy, and contribution. Please don't hesitate to let us know of any issues, successes, or for more features.
+
+* Chris Guiterman (chguiterman@arizona.edu)
+* Ellis Margolis (emargolis@usgs.gov)
+
