@@ -1,0 +1,17 @@
+---
+title: "QC_report"
+output: html_document
+params:
+  FHX: NA
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(burnr)
+library(dplyr)
+library(ggplot2)
+```
+
+```{r plot}
+plot_demograph(params$FHX)
+```
