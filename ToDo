@@ -1,5 +1,5 @@
 * Join NOAA spp table with submissions to check
 * Allow .dat files for fhx
-* make map of submission
+* make map of submission site(s)
 * Print rmd in app window one site at a time, allow download of report
-* convert report to pdf
+X * convert report to pdf
