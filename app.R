@@ -99,7 +99,7 @@ output$contents <- renderTable({
 
 output$report <- downloadHandler(
   # For PDF output, change this to "report.pdf"
-  filename = "QC_report.html",
+  filename = "QC_report.pdf",
   content = function(file) {
     # Copy the report file to a temporary directory before processing it, in
     # case we don't have write permissions to the current working dir (which
@@ -108,7 +108,12 @@ output$report <- downloadHandler(
     file.copy("QC_report.Rmd", tempReport, overwrite = TRUE)
     
     # Set up parameters to pass to Rmd document
-    params <- list(FHX = comb_dat()$FHX[[1]])
+    params <- list(NAME_OF_SITE = comb_dat()$NAME_OF_SITE[[1]],
+                   FHX = comb_dat()$FHX[[1]],
+                   SITE_CODE = comb_dat()$SITE_CODE[[1]],
+                   CONTRIBUTORS = comb_dat()$CONTRIBUTORS[[1]],
+                   SPECIES_CODE = comb_dat()$SPECIES_CODE[[1]]
+                   )
     
     # Knit the document, passing in the `params` list, and eval it in a
     # child of the global environment (this isolates the code in the document
@@ -117,6 +122,11 @@ output$report <- downloadHandler(
                       params = params,
                       envir = new.env(parent = globalenv())
     )
+    # for (i in nrow(comb_dat())) {
+    #   rmarkdown::render(tempReport, output_file = file,
+    #                     params = params,
+    #                     envir = new.env(parent = globalenv())
+    # }
   }
 )
 }

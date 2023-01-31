@@ -1,8 +1,12 @@
 ---
-title: "QC_report"
-output: html_document
+title: "`r params$NAME_OF_SITE`"
+output: pdf_document
 params:
+  NAME_OF_SITE: NA
   FHX: NA
+  SITE_CODE: NA
+  CONTRIBUTORS: NA
+  SPECIES_CODE: NA
 ---
 
 ```{r setup, include=FALSE}
@@ -10,8 +14,34 @@ knitr::opts_chunk$set(echo = TRUE)
 library(burnr)
 library(dplyr)
 library(ggplot2)
+library(glue)
 ```
 
-```{r plot}
-plot_demograph(params$FHX)
+The `r glue("{params$NAME_OF_SITE} ({params$SITE_CODE})")` site includes `r length(series_names(params$FHX))` trees. 
+
+It includes the following species:
+
+```{r species, echo=FALSE, results='asis'}
+spp = as.vector(unlist(strsplit(params$SPECIES_CODE, split = ", ")))
+cat(paste('-', spp), sep='\n')
+```
+
+It is being contributed by:
+
+```{r contrib, echo=FALSE, results="asis"}
+contribs = as.vector(unlist(strsplit(params$CONTRIBUTORS, split = "; ")))
+cat(paste('-', contribs), sep='\n')
+```
+
+
+A check of the FHX file formatting and data entry has been performed, resulting in the following message(s):
+
+```{r check-series, echo=FALSE, results='asis'}
+check_series(params$FHX)
+```
+
+
+Here is a graph of the site data
+```{r plot, echo = FALSE, fig.align='center'}
+plot_demograph(params$FHX, plot_legend = TRUE)
 ```
