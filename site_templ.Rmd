@@ -1,0 +1,33 @@
+---
+title: "`r site_df$NAME_OF_SITE`"
+output: html_document
+---
+
+The `r glue("{site_df$NAME_OF_SITE} ({site_df$SITE_CODE})")` site includes `r length(series_names(site_df$FHX[[1]]))` trees. 
+
+It includes the following species:
+
+```{r species, echo=FALSE, results='asis'}
+spp = as.vector(unlist(strsplit(site_df$SPECIES_CODE, split = ", ")))
+cat(paste('-', spp), sep='\n')
+```
+
+It is being contributed by:
+
+```{r contrib, echo=FALSE, results="asis"}
+contribs = as.vector(unlist(strsplit(site_df$CONTRIBUTORS, split = "; ")))
+cat(paste('-', contribs), sep='\n')
+```
+
+
+A check of the FHX file formatting and data entry has been performed, resulting in the following message(s):
+
+```{r check-series, echo=FALSE, results='asis'}
+check_series(site_df$FHX[[1]])
+```
+
+
+Here is a graph of the site data
+```{r plot, echo = FALSE, fig.align='center'}
+plot_demograph(site_df$FHX[[1]], plot_legend = TRUE)
+```

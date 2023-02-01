@@ -1,0 +1,40 @@
+---
+title: "IMPD file check report"
+date: "`r Sys.Date()`"
+output: html_document
+params:
+  QCdf: NA
+  FHX: NA
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(burnr)
+library(dplyr)
+library(ggplot2)
+library(glue)
+df <- params$QCdf %>% 
+  mutate(FHX = params$FHX)
+
+```
+
+There are `r nrow(df)` sites in this contribution.
+
+There are `r length(df$FHX)` FHX objects.
+
+```{r, echo=FALSE}
+for (i in seq_len(nrow(df))) {
+  site_df <- df[i, ]
+  cat(
+  knitr::knit_child('site_templ.Rmd', envir = environment(), quiet = TRUE)
+  )
+}
+```
+
+
+<!-- ```{r, echo=FALSE} -->
+<!-- for (i in seq_len(nrow(df))) { -->
+<!--     plot(df$FHX[[i]]) -->
+<!-- } -->
+<!-- ``` -->
+

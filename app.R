@@ -99,21 +99,23 @@ output$contents <- renderTable({
 
 output$report <- downloadHandler(
   # For PDF output, change this to "report.pdf"
-  filename = "QC_report.pdf",
+  filename = "QC_report.html",
   content = function(file) {
     # Copy the report file to a temporary directory before processing it, in
     # case we don't have write permissions to the current working dir (which
     # can happen when deployed).
-    tempReport <- file.path(tempdir(), "QC_report.Rmd")
-    file.copy("QC_report.Rmd", tempReport, overwrite = TRUE)
+    tempReport <- file.path(tempdir(), "QC_report2.Rmd")
+    file.copy("QC_report2.Rmd", tempReport, overwrite = TRUE)
     
     # Set up parameters to pass to Rmd document
-    params <- list(NAME_OF_SITE = comb_dat()$NAME_OF_SITE[[1]],
-                   FHX = comb_dat()$FHX[[1]],
-                   SITE_CODE = comb_dat()$SITE_CODE[[1]],
-                   CONTRIBUTORS = comb_dat()$CONTRIBUTORS[[1]],
-                   SPECIES_CODE = comb_dat()$SPECIES_CODE[[1]]
-                   )
+    # params <- list(NAME_OF_SITE = comb_dat()$NAME_OF_SITE[[1]],
+    #                FHX = comb_dat()$FHX[[1]],
+    #                SITE_CODE = comb_dat()$SITE_CODE[[1]],
+    #                CONTRIBUTORS = comb_dat()$CONTRIBUTORS[[1]],
+    #                SPECIES_CODE = comb_dat()$SPECIES_CODE[[1]]
+    #                )
+    params <- list(QCdf = comb_dat(),
+                   FHX = comb_dat()$FHX)
     
     # Knit the document, passing in the `params` list, and eval it in a
     # child of the global environment (this isolates the code in the document
